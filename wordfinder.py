@@ -2,6 +2,9 @@
 from random import choice
 
 class WordFinder:
+    """
+    Reads and returns a word from a file.
+    """
     ...
     def __init__(self, dic):
         """
@@ -11,19 +14,7 @@ class WordFinder:
         self.words = self.stripper(file)
         print(len(self.words), " words read")
 
-    # def print_words(self):
-    #     file = open(self.dic)
-    #     for line in file:
-    #         print(line)
-    #     file.close()
-        
-    # def file_len(self,):
-    #     with open(self.dic) as f:
-    #         for i, l in enumerate(f):
-    #             pass
-    #     return i + 1
-
-    def stripper(self, file):
+    def search(self, file):
         """
         Removes special new-line character
         """
@@ -34,3 +25,13 @@ class WordFinder:
         Returns a random word!
         """
         return choice(self.words)
+
+class SpecialWordFinder(WordFinder):
+    """
+    Reads and return a word from a file, excluding words that start with #
+    """
+    def search(self, file):
+        """
+        Searches for a word in a file and returns the word. Excludes words starting with #
+        """
+        return [word.strip() for word in file if word.strip() and not word.startswith('#')]
